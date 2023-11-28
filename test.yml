@@ -1,0 +1,13 @@
+---
+- name: Print OS Version for Windows
+  hosts: windows_servers
+  gather_facts: false  # We don't need to gather facts in this case
+
+  tasks:
+    - name: Get OS Version
+      win_shell: Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -ExpandProperty Version
+      register: os_version_output
+
+    - name: Print OS Version
+      debug:
+        var: os_version_output.stdout_lines[0]
