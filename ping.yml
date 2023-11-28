@@ -6,5 +6,10 @@
     ANSIBLE_REMOTE_TEMP: C:\ansible_temp
   tasks:
 
-    - name: Ping the hosts
-      ping:
+    - name: set the default shell to PowerShell
+      win_regedit:
+        path: HKLM:\SOFTWARE\OpenSSH
+        name: DefaultShell
+        data: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        type: string
+        state: present
