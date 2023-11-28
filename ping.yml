@@ -1,0 +1,9 @@
+---
+- name: Print OS Version for Windows
+  hosts: windows_servers
+  gather_facts: false  # We don't need to gather facts in this case
+
+  tasks:
+
+    - name: Ping the hosts
+      ping:
