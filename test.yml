@@ -1,13 +1,9 @@
 ---
-- name: Print OS Version for Windows
-  hosts: windows_servers
-  gather_facts: false  # We don't need to gather facts in this case
+- name: Print OS Version
+  hosts: your_target_group
+  gather_facts: true  # This gathers facts about the remote hosts, including OS information
 
   tasks:
-    - name: Get OS Version
-      win_shell: Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -ExpandProperty Version
-      register: os_version_output
-
-    - name: Print OS Version
+    - name: Display OS Version
       debug:
-        var: os_version_output.stdout_lines[0]
+        var: ansible_facts['distribution'] + " " + ansible_facts['distribution_version']
